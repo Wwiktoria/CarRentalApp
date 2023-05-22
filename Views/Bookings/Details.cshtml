@@ -1,0 +1,78 @@
+﻿@model CarRentalApp.Models.DbModels.Booking
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Booking</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Car.CarRegistrationNumberNotKey)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Car.CarRegistrationNumberNotKey)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Client.ClientName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.ClientName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookingStartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookingStartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookingEndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookingEndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookingCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookingCost)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BookingId }) 
+
+</p>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<style>
+    body {
+        background-image: url('../../Content/Images/backgroundName.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top center;
+    }
+</style>

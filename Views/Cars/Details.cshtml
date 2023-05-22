@@ -1,0 +1,109 @@
+﻿@model CarRentalApp.Models.DbModels.Car
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Car</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CarModel.CarBrandName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarModel.CarBrandName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CarRegistrationNumberNotKey)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarRegistrationNumberNotKey)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CarYearOfProduction)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarYearOfProduction)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CarMileage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarMileage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CarIsRented)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarIsRented)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CarRentalCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarRentalCost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CarPower)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarPower)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CarColor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarColor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CarNumberOfSeats)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarNumberOfSeats)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CarBodyType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarBodyType)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CarRegistrationNumber })
+
+</p>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<style>
+    body {
+        background-image: url('../../Content/Images/backgroundName.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top center;
+    }
+</style>

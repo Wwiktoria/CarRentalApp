@@ -1,0 +1,80 @@
+﻿@model CarRentalApp.Models.DbModels.Booking
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Booking</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Car.CarRegistrationNumberNotKey)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Car.CarRegistrationNumberNotKey)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Client.ClientName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.ClientName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookingStartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookingStartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookingEndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookingEndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookingCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookingCost)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
+<style>
+    body {
+        background-image: url('../../Content/Images/backgroundName.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top center;
+    }
+</style>

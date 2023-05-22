@@ -1,0 +1,87 @@
+﻿@model IEnumerable<CarRentalApp.Models.DbModels.Booking>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Bookings</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm("Search", "Bookings", FormMethod.Get))
+{
+    <p>
+        @Html.TextBox("phoneNumber")
+        <input type="submit" value="Search" />
+    </p>
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Car.CarRegistrationNumberNotKey)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Client.ClientName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookingDate)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.BookingStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookingEndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookingCost)
+            </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Car.FullCarName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client.ClientFullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingDate)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.BookingStartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookingEndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookingCost)
+                </td>*@
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.BookingId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.BookingId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.BookingId }) |
+            @Html.ActionLink("Rent", "CreateFromBooking", "Rentals", new { id = item.BookingId },null)
+        </td>
+        </tr>
+    }
+
+</table>
+<style>
+    body {
+        background-image: url('../../Content/Images/backgroundName.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top center;
+    }
+    .table a[href*='/Rent']{
+        color : darkcyan !important ;
+    }
+</style>
+

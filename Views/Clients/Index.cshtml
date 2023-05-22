@@ -1,0 +1,97 @@
+﻿@model IEnumerable<CarRentalApp.Models.DbModels.Client>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Clients</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ClientName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClientSurname)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.ClientDocumentId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClientDocumentName)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.ClientTelephone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClientEmail)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.ClientStreet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClientBuildingNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClientFlatNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClientCity)
+            </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientSurname)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.ClientDocumentId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClientDocumentName)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientTelephone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientEmail)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.ClientStreet)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClientBuildingNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClientFlatNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClientCity)
+                </td>*@
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ClientId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ClientId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ClientId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<style>
+    body {
+        background-image: url('Content/Images/backgroundName.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top center;
+    }
+</style>

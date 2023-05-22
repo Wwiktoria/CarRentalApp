@@ -1,0 +1,48 @@
+﻿@model IEnumerable<CarRentalApp.Models.DbModels.Worker>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Workers</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkerSurname)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorkerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorkerSurname)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.WorkerId }) |
+                @*@Html.ActionLink("Details", "Details", new { id=item.WorkerId }) |*@
+                @Html.ActionLink("Delete", "Delete", new { id = item.WorkerId })
+            </td>
+        </tr>
+    }
+
+</table>
+<style>
+    body {
+        background-image: url('Content/Images/backgroundName.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top center;
+    }
+</style>

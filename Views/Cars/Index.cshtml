@@ -1,0 +1,96 @@
+﻿@model IEnumerable<CarRentalApp.Models.DbModels.Car>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Cars</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CarRegistrationNumberNotKey)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CarModel.CarBrandName)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.CarYearOfProduction)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarMileage)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.CarIsRented)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.CarRentalCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarPower)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarColor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarNumberOfSeats)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarBodyType)
+            </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarRegistrationNumberNotKey)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarModel.FullCarModel)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.CarYearOfProduction)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarMileage)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.CarIsRented)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.CarRentalCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarPower)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarColor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarNumberOfSeats)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarBodyType)
+                </td>*@
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CarRegistrationNumber }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CarRegistrationNumber }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CarRegistrationNumber })
+            </td>
+        </tr>
+    }
+
+</table>
+<style>
+    body {
+        background-image: url('Content/Images/backgroundName.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top center;
+    }
+</style>

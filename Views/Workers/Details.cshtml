@@ -1,0 +1,42 @@
+﻿@model CarRentalApp.Models.DbModels.Worker
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Worker</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkerSurname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkerSurname)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.WorkerId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<style>
+    body {
+        background-image: url('../../Content/Images/backgroundName.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top center;
+    }
+</style>
