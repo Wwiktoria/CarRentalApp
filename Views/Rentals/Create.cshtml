@@ -10,58 +10,65 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>Rental</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        
+<div class="form-horizontal">
+    <h4>Rental</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.RentalStartDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.RentalStartDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.RentalStartDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.RentalEndDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.RentalEndDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.RentalEndDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ClientId, "Client", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ClientId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ClientId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.WorkerId, "Worker", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("WorkerId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.WorkerId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CarRegistrationNumber, "Car", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("CarRegistrationNumber", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CarRegistrationNumber, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.RentalStartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.RentalStartDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.RentalStartDate, "", new { @class = "text-danger" })
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.RentalEndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.RentalEndDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.RentalEndDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ClientId, "Client", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("ClientId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ClientId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.WorkerId, "Worker", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("WorkerId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.WorkerId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CarRegistrationNumber, "Car", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("CarRegistrationNumber", null, htmlAttributes: new { @class = "form-control disabled-field", disabled = "disabled", })
+            @Html.ValidationMessageFor(model => model.CarRegistrationNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model.NotificationMessage))
+    {
+        <div class="alert alert-danger">
+            @Model.NotificationMessage
+        </div>
+    }
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
 }
 
 <div>
@@ -74,4 +81,40 @@
         background-size: cover;
         background-position: top center;
     }
+    .disabled-field {
+        opacity: 0.5; /* Ustawienie poziomu przezroczystości na 50% */
+        pointer-events: none; /* Wyłączenie zdarzeń dla elementu */
+    }
 </style>
+
+<script>
+    // Funkcja wywoływana przy załadowaniu strony
+    window.onload = function () {
+        // Pobierz referencje do pól formularza
+        var rentalStartDate = document.getElementById('RentalStartDate');
+        var rentalEndDate = document.getElementById('RentalEndDate');
+        var carRegistrationNumber = document.getElementById('CarRegistrationNumber');
+
+        // Funkcja sprawdzająca, czy pola są wypełnione
+        function checkFields() {
+            // Sprawdź, czy RentalStartDate i RentalEndDate mają wartości
+            if (rentalStartDate.value && rentalEndDate.value) {
+                // Odblokuj pole CarRegistrationNumber
+                carRegistrationNumber.disabled = false;
+                carRegistrationNumber.classList.remove('disabled-field');
+                
+            } else {
+                // Zablokuj pole CarRegistrationNumber
+                carRegistrationNumber.disabled = true;
+                carRegistrationNumber.classList.add('disabled-field');
+            }
+        }
+
+        // Dodaj nasłuchiwacze zdarzeń na pola RentalStartDate i RentalEndDate
+        rentalStartDate.addEventListener('input', checkFields);
+        rentalEndDate.addEventListener('input', checkFields);
+
+        // Wywołaj funkcję checkFields na starcie, aby zainicjować stan pola CarRegistrationNumber
+        checkFields();
+    };
+</script>

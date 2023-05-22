@@ -1,0 +1,23 @@
+﻿@model CarRentalApp.Models.DbModels.Rental
+
+@{
+    ViewBag.Title = "CarIsRented";
+}
+
+<div>
+    <h1>The car is rented between those dates.</h1>
+    
+
+</div>
+<div>
+    @Html.ActionLink("Go back", "Create")
+
+</div>
+<style>
+    body {
+        background-image: url('../../Content/Images/backgroundName.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top center;
+    }
+</style>

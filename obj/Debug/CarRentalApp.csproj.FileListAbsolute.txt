@@ -81,3 +81,4 @@ C:\Users\Administrator\Desktop\CarRentalApp-ASP.NET\CarRentalApp\obj\Debug\CarRe
 C:\Users\Administrator\Desktop\CarRentalApp-ASP.NET\CarRentalApp\obj\Debug\CarRentalApp.Migrations.six3.resources
 C:\Users\Administrator\Desktop\CarRentalApp-ASP.NET\CarRentalApp\obj\Debug\CarRentalApp.Migrations.seven.resources
 C:\Users\Administrator\Desktop\CarRentalApp-ASP.NET\CarRentalApp\obj\Debug\CarRentalApp.Migrations.seven1.resources
+C:\Users\Administrator\Desktop\CarRentalApp-ASP.NET\CarRentalApp\obj\Debug\CarRentalApp.Migrations.eight.resources

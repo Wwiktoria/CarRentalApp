@@ -29,5 +29,7 @@ namespace CarRentalApp.Models.ViewModels
         public int WorkerId { get; set; }
 
         public int CarRegistrationNumber { get; set; }
+        public bool ShowNotification { get; set; }
+        public string NotificationMessage { get; set; }
     }
 }

@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using CarRentalApp.Models;
 using CarRentalApp.Models.DbModels;
 using CarRentalApp.Models.ViewModels;
@@ -31,8 +30,12 @@ namespace CarRentalApp.Controllers
             }
             return View();
         }
+        public ActionResult CarIsRented()
+        {
+            return View();
+        }
 
-        
+
 
 
         // GET: Rentals/Details/5
@@ -52,16 +55,16 @@ namespace CarRentalApp.Controllers
 
         // GET: Rentals/Create
         public ActionResult Create()
-        { 
+        {
 
             ViewBag.CarRegistrationNumber = new SelectList(db.Cars, "CarRegistrationNumber", "FullCarName");
             ViewBag.ClientId = new SelectList(db.Clients, "ClientId", "ClientFullName");
             ViewBag.WorkerId = new SelectList(db.Workers, "WorkerId", "FullWorkerName");
-            
+
             return View(new RentalsViewModel());
-            
+
         }
-        
+
         public ActionResult CreateFromBooking(int id)
         {
             var booking = db.Bookings.Find(id);
@@ -85,7 +88,7 @@ namespace CarRentalApp.Controllers
             ViewBag.WorkerId = new SelectList(db.Workers, "WorkerId", "FullWorkerName");
 
 
-            
+
             return View(new Rental());
         }
 
@@ -129,28 +132,56 @@ namespace CarRentalApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "RentalId,RentalCost,RentalStartDate,RentalEndDate,ClientId,WorkerId,CarRegistrationNumber")] Rental rental)
         {
-            if (ModelState.IsValid)
-            {
-                
-                rental.CalculateRentalCost();
-                //ViewBag.RentalCost = rental.RentalCost;
-                
-                //Car car = db.Cars.Find(rental.CarRegistrationNumber);
+            var selectedCar = db.Cars.FirstOrDefault(c => c.CarRegistrationNumber == rental.CarRegistrationNumber);
 
-                //if (car != null)
-                //{
-                //    // Ustawienie statusu samochodu na wynajęty
-                //    car.CarIsRented = true;
-                //}
-                db.Rentals.Add(rental);
-                db.SaveChanges();
-                return RedirectToAction("RentalCost");
+            if (selectedCar != null)
+            {
+
+                var rentals = db.Rentals.Where(c => c.CarRegistrationNumber == selectedCar.CarRegistrationNumber);
+                int count = 0;
+                foreach (var item in rentals)
+                {
+                    if(DateTime.Compare(item.RentalEndDate, rental.RentalStartDate) <= 0)
+                    {
+                        if(DateTime.Compare(item.RentalStartDate, rental.RentalEndDate) <= 0)
+                        {
+                            
+                        }
+                        else { count++; }
+                    }
+                    else { count++; }
+                }
+
+                if (count == 0)
+                {
+                    if (ModelState.IsValid)
+                    {
+
+                        rental.CalculateRentalCost();
+                        Car car = db.Cars.Find(rental.CarRegistrationNumber);
+
+                        if (car != null)
+                        {
+                            // Ustawienie statusu samochodu na wynajęty
+                            car.CarIsRented = true;
+                        }
+                        db.Rentals.Add(rental);
+                        db.SaveChanges();
+                        return RedirectToAction("RentalCost");
+                    }
+                }
+                else
+                {
+
+                    return RedirectToAction("CarIsRented");
+                }
             }
+
 
             ViewBag.CarRegistrationNumber = new SelectList(db.Cars, "CarRegistrationNumber", "FullCarName", rental.CarRegistrationNumber);
             ViewBag.ClientId = new SelectList(db.Clients, "ClientId", "ClientFullName", rental.ClientId);
             ViewBag.WorkerId = new SelectList(db.Workers, "WorkerId", "FullWorkerName", rental.WorkerId);
-            return View(new Rental());
+            return View(new RentalsViewModel());
         }
 
         // GET: Rentals/Edit/5

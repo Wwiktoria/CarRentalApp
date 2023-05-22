@@ -30,6 +30,8 @@ namespace CarRentalApp.Models.DbModels
         [DataType(DataType.Date)]
         public DateTime RentalEndDate { get; set; }
 
+        public bool ShowNotification { get; set; }
+        public string NotificationMessage { get; set; }
 
         [Required]
         public int ClientId { get; set; }
