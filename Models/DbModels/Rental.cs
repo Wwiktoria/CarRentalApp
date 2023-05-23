@@ -47,6 +47,8 @@ namespace CarRentalApp.Models.DbModels
 
         public virtual Car Car { get; set; }
 
+        public List<Rental> Reservations { get; set; }
+
         public Rental()
         {
             RentalId++;
@@ -58,6 +60,7 @@ namespace CarRentalApp.Models.DbModels
             RentalEndDate = rentalEndDate;
             Client = client;
             Worker = worker;
+            Car = car;
             CarRegistrationNumber = car.CarRegistrationNumber;
             ClientId = client.ClientId;
             WorkerId = worker.WorkerId;

@@ -32,17 +32,11 @@ namespace CarRentalApp.Controllers
             return View("Searched", bookings.ToList());
         }
 
-        
+        public ActionResult CarIsRented()
+        {
+            return View();
+        }
 
-        //public ActionResult Rent()
-        //{
-        //    //ViewBag.CarRegistrationNumber = new SelectList(db.Cars, "CarRegistrationNumber", "FullCarName");
-        //    //ViewBag.ClientId = new SelectList(db.Clients, "ClientId", "ClientFullName");
-        //    //ViewBag.WorkerId = new SelectList(db.Workers, "WorkerId", "FullWorkerName");
-        //    //Booking booking = new Booking();
-        //    //booking.BookingToRental(booking);
-        //    //return View("../Rentals/Create");
-        //}
 
         // GET: Bookings/Details/5
         public ActionResult Details(int? id)
@@ -74,17 +68,73 @@ namespace CarRentalApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "BookingId,BookingDate,BookingStartDate,BookingEndDate,BookingCost,ClientId,CarRegistrationNumber")] Booking booking)
         {
-            if (ModelState.IsValid)
-            {
-                db.Bookings.Add(booking);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
+            var selectedCar = db.Cars.FirstOrDefault(c => c.CarRegistrationNumber == booking.CarRegistrationNumber);
+
+
+            if (selectedCar != null)
+            {
+
+                var rentals = db.Rentals.Where(c => c.CarRegistrationNumber == selectedCar.CarRegistrationNumber);
+                var bookings = db.Bookings.Where(c => c.CarRegistrationNumber == selectedCar.CarRegistrationNumber);
+                int count = 0;
+                foreach (var item in rentals)
+                {
+                    if (DateTime.Compare(item.RentalEndDate, booking.BookingStartDate) <= 0)
+                    {
+                        if (DateTime.Compare(item.RentalStartDate, booking.BookingEndDate) <= 0)
+                        {
+                            foreach (var book in bookings)
+                            {
+                                if (DateTime.Compare(book.BookingEndDate, booking.BookingStartDate) <= 0)
+                                {
+                                    if (DateTime.Compare(book.BookingStartDate, booking.BookingEndDate) <= 0)
+                                    {
+
+                                    }
+                                    else { count++; }
+                                }
+                                else { count++; }
+                            }
+
+                        }
+                        else { count++; }
+                    }
+                    else { count++; }
+                }
+
+                if (count == 0)
+                {
+                    if (ModelState.IsValid)
+                    {
+                        Car car = db.Cars.Find(booking.CarRegistrationNumber);
+
+                        if (car != null)
+                        {
+                            // Ustawienie statusu samochodu na wynajęty
+                            car.CarIsRented = true;
+                        }
+                        db.Bookings.Add(booking);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                }
+                else
+                {
+
+                    return RedirectToAction("CarIsRented");
+                }
+            }
             ViewBag.CarRegistrationNumber = new SelectList(db.Cars, "CarRegistrationNumber", "FullCarName", booking.CarRegistrationNumber);
             ViewBag.ClientId = new SelectList(db.Clients, "ClientId", "ClientFullName", booking.ClientId);
             return View(new Booking());
+
+
         }
+
+
+
+
 
         // GET: Bookings/Edit/5
         public ActionResult Edit(int? id)

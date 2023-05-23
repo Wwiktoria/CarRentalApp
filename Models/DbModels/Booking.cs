@@ -46,19 +46,19 @@ namespace CarRentalApp.Models.DbModels
         public Booking()
         {
             BookingId++;
-            BookingDate = DateTime.Today.Date;
+            
         }
 
-        public Booking(DateTime bookingStartDate, DateTime bookingEndDate, int bookingCost, Client client, Car car)
+        public Booking(DateTime bookingStartDate, DateTime bookingEndDate, Client client, Car car)
         {
             
             BookingStartDate = bookingStartDate;
             BookingEndDate = bookingEndDate;
-            BookingCost = bookingCost;
             Client = client;
             ClientId = client.ClientId;
             Car = car;
             CarRegistrationNumber = car.CarRegistrationNumber;
+            BookingDate = DateTime.Today.Date;
         }
 
         public override string ToString()

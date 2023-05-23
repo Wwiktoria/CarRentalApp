@@ -1,6 +1,8 @@
 ﻿@model CarRentalApp.Models.ViewModels.ClientsViewModel
 @{
     ViewBag.Title = "Create";
+    Html.EnableClientValidation(true);
+    Html.EnableUnobtrusiveJavaScript(true);
 }
 
 <h2>Create</h2>

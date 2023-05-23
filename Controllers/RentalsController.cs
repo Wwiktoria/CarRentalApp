@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -32,6 +33,8 @@ namespace CarRentalApp.Controllers
         }
         public ActionResult CarIsRented()
         {
+            
+
             return View();
         }
 
@@ -134,10 +137,13 @@ namespace CarRentalApp.Controllers
         {
             var selectedCar = db.Cars.FirstOrDefault(c => c.CarRegistrationNumber == rental.CarRegistrationNumber);
 
+            TempData["SelectedCar"] = selectedCar;
+
             if (selectedCar != null)
             {
 
                 var rentals = db.Rentals.Where(c => c.CarRegistrationNumber == selectedCar.CarRegistrationNumber);
+                var bookings = db.Bookings.Where(c => c.CarRegistrationNumber == selectedCar.CarRegistrationNumber);
                 int count = 0;
                 foreach (var item in rentals)
                 {
@@ -145,6 +151,18 @@ namespace CarRentalApp.Controllers
                     {
                         if(DateTime.Compare(item.RentalStartDate, rental.RentalEndDate) <= 0)
                         {
+                            foreach(var book in bookings)
+                            {
+                                if (DateTime.Compare(book.BookingEndDate, rental.RentalStartDate) <= 0)
+                                {
+                                    if (DateTime.Compare(book.BookingStartDate, rental.RentalEndDate) <= 0)
+                                    {
+
+                                    }
+                                    else { count++; }
+                                }
+                                else { count++; }
+                            }
                             
                         }
                         else { count++; }
@@ -172,7 +190,7 @@ namespace CarRentalApp.Controllers
                 }
                 else
                 {
-
+                    
                     return RedirectToAction("CarIsRented");
                 }
             }

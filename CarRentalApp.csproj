@@ -178,6 +178,10 @@
     <Compile Include="Migrations\202305222105389_eight.designer.cs">
       <DependentUpon>202305222105389_eight.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202305231010362_nine.cs" />
+    <Compile Include="Migrations\202305231010362_nine.designer.cs">
+      <DependentUpon>202305231010362_nine.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Models\DbModels\Booking.cs" />
@@ -281,6 +285,7 @@
     <Content Include="Views\Bookings\Searched.cshtml" />
     <Content Include="Views\Rentals\CreateFromBooking.cshtml" />
     <Content Include="Views\Rentals\CarIsRented.cshtml" />
+    <Content Include="Views\Bookings\CarIsRented.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -345,6 +350,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305222105389_eight.resx">
       <DependentUpon>202305222105389_eight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305231010362_nine.resx">
+      <DependentUpon>202305231010362_nine.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

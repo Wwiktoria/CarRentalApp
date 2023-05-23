@@ -23,6 +23,12 @@ namespace CarRentalApp.Controllers
         }
 
 
+        // Pozostałe akcje kontrolera
+
+        
+
+
+
         // GET: Clients/Details/5
         public ActionResult Details(int? id)
         {
@@ -53,12 +59,13 @@ namespace CarRentalApp.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 db.Clients.Add(client);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(new Client());
+            return View(new ClientsViewModel());
         }
 
         // GET: Clients/Edit/5

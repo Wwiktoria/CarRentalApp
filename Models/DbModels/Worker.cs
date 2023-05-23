@@ -10,18 +10,20 @@ namespace CarRentalApp.Models.DbModels
 
         [Required]
         [Display(Name = "Worker Name")]
+        [RegularExpression(@"^.{3,}$", ErrorMessage = "Name must have at least 3 characters.")]
         public string WorkerName { get; set; }
 
         [Display(Name = "Worker Surname")]
         [Required]
+        [RegularExpression(@"^.{3,}$", ErrorMessage = "Name must have at least 3 characters.")]
         public string WorkerSurname { get; set; }
         public virtual List<Rental> Rentals { get; set; }
 
         public Worker() { }
 
-        public Worker(int workerId, string workerName, string workerSurname)
+        public Worker( string workerName, string workerSurname)
         {
-            WorkerId = workerId;
+           
             WorkerName = workerName;
             WorkerSurname = workerSurname;
         }
